@@ -11,9 +11,10 @@ def get_src_myconnection():
             host= config['source_mysql']['host'], 
             user= config['source_mysql']['user'], 
             db= config['source_mysql']['db'],
-            password= config['source_mysql']['password'])
+            password= config['source_mysql']['password'],
+            port=int(config['source_mysql']['port']))
         print('Connection successful')
-    except Exception as e:
+    except Exception as e:  
         print(f"Error: {e}")
         return None
     
@@ -58,7 +59,7 @@ if __name__ == "__main__":
         print("Connection to source failed!")
     connection2 = get_tgt_myconnection()
     if connection2:
-        print("Connection to targetsuccessful!")
+        print("Connection to target successful!")
         connection2.close()
     else:
         print("Connection to target failed!")
