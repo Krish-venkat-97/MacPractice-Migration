@@ -14,7 +14,7 @@ def get_src_myconnection():
             password= config['source_mysql']['password'],
             port=int(config['source_mysql']['port']))
         print('Connection successful')
-    except Exception as e:  
+    except Exception as e:
         print(f"Error: {e}")
         return None
     
