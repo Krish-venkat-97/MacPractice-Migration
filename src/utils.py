@@ -74,3 +74,5 @@ def getTargetFilePath():
 def getLogFilePath():
     return config['log_directory']['log_directory']
 
+def getDocumentExcelPath():
+    return config['document_excel_path']['document_excel_path']
