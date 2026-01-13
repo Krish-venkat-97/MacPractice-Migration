@@ -122,8 +122,8 @@ tgt_patient_df = pd.read_sql("SELECT id AS tgt_patient_id,macpractice_patient_id
 merged_df1 = document_df.merge(tgt_patient_df, left_on='src_patient_id', right_on='macpractice_patient_id', how='inner')
 merged_df2 = merged_df1.drop(columns=['macpractice_patient_id','src_patient_id'])
 
-scan_df = merged_df2[merged_df2['file_extension'].isin(['.pdf','.jpg','.jp2','.jpeg','.png','.tif','.tiff','.html','.htm'])][['attached_file_id', 'filename', 'hash', 'tgt_patient_id','document_date', 'source_table', 'file_extension']]
-letter_df = merged_df2[~merged_df2['file_extension'].isin(['.pdf','.jpg','.jp2','.jpeg','.png','.tif','.tiff','.html','.htm'])][['attached_file_id', 'filename', 'hash', 'tgt_patient_id','document_date', 'source_table', 'file_extension']]
+scan_df = merged_df2[merged_df2['file_extension'].isin(['.pdf','.jpg','.jp2','.jpeg','.png','.tif','.tiff','.html','.htm','.dcm'])][['attached_file_id', 'filename', 'hash', 'tgt_patient_id','document_date', 'source_table', 'file_extension']]
+letter_df = merged_df2[~merged_df2['file_extension'].isin(['.pdf','.jpg','.jp2','.jpeg','.png','.tif','.tiff','.html','.htm','.dcm'])][['attached_file_id', 'filename', 'hash', 'tgt_patient_id','document_date', 'source_table', 'file_extension']]
 
 # insert auto increment scan_ids
 scan_max = pd.read_sql("SELECT IFNULL(MAX(id),0) AS max_id FROM scan_documents",target_myconnection)
