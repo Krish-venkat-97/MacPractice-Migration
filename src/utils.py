@@ -3,6 +3,8 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from libs import *
 from src.config import config
+import datetime
+from datetime import date, datetime
 
 
 def get_src_myconnection():
@@ -44,6 +46,8 @@ def safe_value(value):
             return '"' + value.replace("\\","\\\\") + '"'
         else:
             return '"' + value + '"'
+    elif isinstance(value, datetime):
+        return '"' + value.strftime('%Y-%m-%d %H:%M:%S') + '"'
     elif isinstance(value,date):
         return '"' + value.strftime('%Y-%m-%d') + '"'
     else:

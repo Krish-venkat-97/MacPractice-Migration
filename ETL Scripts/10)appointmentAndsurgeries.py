@@ -105,6 +105,9 @@ appt_desc_mapping_df = pd.read_sql(
     tgt_connection
 )
 
+appt_desc_mapping_df = appt_desc_mapping_df.dropna(subset=['source_id'])
+appt_desc_mapping_df['source_id'] = appt_desc_mapping_df['source_id'].astype(int)
+
 # convert to dict: {source_id: target_id}
 appt_desc_mapping = dict(zip(appt_desc_mapping_df['source_id'], appt_desc_mapping_df['target_id']))
 
@@ -170,7 +173,7 @@ for _,row in src_appointments_df.iterrows():
                 {safe_value(row['appointment_id'])},
                 {safe_value(row['patient_id'])},
                 1,
-                5,
+                3,
                 {safe_value(appt_desc_mapping.get(row['appointment_description_id']))},  -- mapped target id
                 {safe_value(row['appointment_date'])},
                 {safe_value(row['start_time'])},
@@ -233,7 +236,7 @@ for _,row in src_surgery_df.iterrows():
                 {safe_value(row['surgery_id'])},
                 {safe_value(row['patient_id'])},
                 1,
-                5,
+                3,
                 {safe_value(row['admission_date'])},
                 {safe_value(row['admission_time'])},
                 {safe_value(row['start_time'])},
